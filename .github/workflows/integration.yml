@@ -5,8 +5,8 @@ name: Integration
 on:
   pull_request:
     branches:
-      - master
-      - development
+    - master
+    - development
 
 jobs:
 
@@ -17,13 +17,13 @@ jobs:
 
     steps:
 
-      - name: Checkout
-        uses: actions/checkout@master
+    - name: Checkout
+      uses: actions/checkout@master
 
-      - name: Dockerfile linter
-        id: dockerfile
-        uses: ./.github/actions/dockerfile-linter
-        with:
-          dockerfile: "./.github/actions/dockerfile-linter/Dockerfile"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Dockerfile linter
+      id: dockerfile
+      uses: ./.github/actions/dockerfile-linter
+      with:
+        dockerfile: "./.github/actions/dockerfile-linter/Dockerfile"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
