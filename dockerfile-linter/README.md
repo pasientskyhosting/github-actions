@@ -6,7 +6,7 @@ Lint a Dockerfile, or many Dockerfiles.
 
 ### `dockerfile`
 
-**Required** Path to dockerfile. Default `.`
+**Required** Path to dockerfile. Default `./Dockerfile`
 
 ## Outputs
 
@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@master
       - name: dockerfile-linter linter
         id: dockerfile-linter-linter
-        uses: ./dockerfile-linter
+        uses: pasientskyhosting/github-actions/dockerfile-linter@v1
         with:
           dockerfile: ./path/to/project/Dockerfile
         env:
