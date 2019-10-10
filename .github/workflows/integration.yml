@@ -24,6 +24,9 @@ jobs:
       id: dockerfile
       uses: ./dockerfile-linter
       with:
-        dockerfile: "./dockerfile-linter/Dockerfile"
+        dockerfile: >
+          ./dockerfile-linter/Dockerfile 
+          ./docker-build-push/Dockerfile
+          ./hello-world-docker/Dockerfile
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
