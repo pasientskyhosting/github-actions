@@ -1,6 +1,6 @@
 ---
 
-name: Integration
+name: Linters
 
 on:
   pull_request:
@@ -10,10 +10,10 @@ on:
 
 jobs:
 
-  lint:
+  dockerfile_lint:
 
     runs-on: ubuntu-18.04
-    name: Linters
+    name: Dockerfile Linters
 
     steps:
 
