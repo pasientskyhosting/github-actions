@@ -9,11 +9,7 @@ fi
 cd $GITHUB_WORKSPACE
 DOCKERFILE=$1
 
-if [[ ! -f $DOCKERFILE ]]; then
-	echo $DOCKERFILE not found. Exiting.
-	exit 1
-fi
-
+echo "Using $DOCKERFILE"
 set +e
 
 OUTPUT=$(/dockerfilelint/bin/dockerfilelint "$DOCKERFILE")
