@@ -1,0 +1,45 @@
+---
+
+name: Linters
+
+on:
+  pull_request:
+    branches:
+    - master
+    - development
+
+jobs:
+
+  dockerfile_lint:
+
+    runs-on: ubuntu-18.04
+    name: Dockerfile Linters
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: docker-build-push linter
+      id: docker-build-push-linter
+      uses: ./dockerfile-linter
+      with:
+        dockerfile: ./docker-build-push/Dockerfile
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: hello-world-docker linter
+      id: hello-world-docker-linter
+      uses: ./dockerfile-linter
+      with:
+        dockerfile: ./hello-world-docker/Dockerfile
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: dockerfile-linter linter
+      id: dockerfile-linter-linter
+      uses: ./dockerfile-linter
+      with:
+        dockerfile: ./dockerfile-linter/Dockerfile
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
