@@ -1,0 +1,61 @@
+---
+
+name: Integration
+
+on:
+  pull_request:
+    branches:
+      - master
+      - development
+
+jobs:
+
+  build_job:
+    name: Go ${{ matrix.go }} sample
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        go: [ '1.13.1' ]
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@master
+        
+      - name: golangci-lint
+        id: golint        
+        #uses: reviewdog/action-golangci-lint@v1
+        uses: docker://reviewdog/action-golangci-lint:v1.0.4 # pre-build docker image
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          level: warning
+
+      - name: Setup go
+        uses: actions/setup-go@v1
+        with:
+          go-version: ${{ matrix.go }}
+
+      - name: Run go
+        env:
+          TEST_ENV: "Kallejandro"
+        run: |          
+          go run src/main.go
+
+  hello_world_job:
+    runs-on: ubuntu-18.04
+    name: A job to say hello
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Hello world docker action step
+        id: hello
+        uses: ./.github/actions/hello-world-docker-action
+        with:
+          who-to-greet: 'Kallejandro'
+
+      # Use the output from the `hello` step
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"

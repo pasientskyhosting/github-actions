@@ -1,0 +1,36 @@
+---
+
+name: 'Docker Build Publish'
+description:  'Build and publish Docker image. Uses git tag if none given'
+
+inputs:
+  repo_name:
+    description: 'Name of Docker repo'
+    required: true    
+  username:
+    description: 'Username to Docker registry'
+    required: true
+  password:
+    description: 'Password to Docker registry'
+    required: true
+  registry:
+    description: 'Docker registry to use'
+    required: true  
+    default: docker.io
+  tag:
+    description: 'Docker image tag'
+    required: false
+
+outputs:
+  build-time:
+    description: 'The time the image was built'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.repo-name }}
+    - ${{ inputs.username }}
+    - ${{ inputs.password }}
+    - ${{ inputs.registry }}
+    - ${{ inputs.tag }}
