@@ -7,7 +7,7 @@ inputs:
   dockerfile:
     description: 'Path to Dockerfile'
     required: true
-    default: '.'
+    default: './Dockerfile'
 
 outputs:
 
