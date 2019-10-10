@@ -1,6 +1,7 @@
 # Awesome Actions
 
 ![GitHub Actions status | Linters](https://github.com/pasientskyhosting/github-actions/workflows/Linters/badge.svg)
+![Release](https://img.shields.io/github/v/release/pasientskyhosting/github-actions.svg)
 
 <p align="center">
   <br>
