@@ -1,0 +1,12 @@
+---
+
+name: 'Ansible Lint'
+description: 'Run ansible-lint'
+
+inputs:
+  
+outputs:
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
