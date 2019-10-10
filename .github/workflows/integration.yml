@@ -12,7 +12,7 @@ jobs:
 
   lint:
 
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-18.04
     name: Linters
 
     steps:
