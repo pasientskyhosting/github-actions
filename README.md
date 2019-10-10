@@ -1,6 +1,6 @@
 # Awesome Actions
 
-![GitHub Actions status | pasientskyhosting/github-actions](https://github.com/pasientskyhosting/github-actions/workflows/Integration/badge.svg)
+![GitHub Actions status | Linters](https://github.com/pasientskyhosting/github-actions/workflows/Linters/badge.svg)
 
 <p align="center">
   <br>
