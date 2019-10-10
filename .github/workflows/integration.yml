@@ -22,8 +22,8 @@ jobs:
 
     - name: Dockerfile linter
       id: dockerfile
-      uses: ./.github/actions/dockerfile-linter
+      uses: ./dockerfile-linter
       with:
-        dockerfile: "./.github/actions/dockerfile-linter/Dockerfile"
+        dockerfile: "./dockerfile-linter/Dockerfile"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
