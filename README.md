@@ -1,5 +1,7 @@
 # Awesome Actions
 
+![GitHub Actions status | sdras/awesome-actions](https://github.com/pasientskyhosting/github-actions/workflows/Integration/badge.svg)
+
 <p align="center">
   <br>
     <img src="https://image.ibb.co/cZ1q5f/awesome-actions.jpg" />
