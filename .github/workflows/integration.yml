@@ -20,10 +20,26 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
-    - name: Dockerfile linter
+    - name: docker-build-push linter
       id: dockerfile
       uses: ./dockerfile-linter
       with:
-        dockerfile: ./*
+        dockerfile: ./docker-build-push/Dockerfile
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: hello-world-docker linter
+      id: dockerfile
+      uses: ./dockerfile-linter
+      with:
+        dockerfile: ./hello-world-docker/Dockerfile
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: dockerfile-linter linter
+      id: dockerfile
+      uses: ./dockerfile-linter
+      with:
+        dockerfile: ./dockerfile-linter/Dockerfile
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
