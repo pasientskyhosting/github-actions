@@ -21,7 +21,7 @@ jobs:
       uses: actions/checkout@master
 
     - name: docker-build-push linter
-      id: dockerfile
+      id: docker-build-push-linter
       uses: ./dockerfile-linter
       with:
         dockerfile: ./docker-build-push/Dockerfile
@@ -29,7 +29,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: hello-world-docker linter
-      id: dockerfile
+      id: hello-world-docker-linter
       uses: ./dockerfile-linter
       with:
         dockerfile: ./hello-world-docker/Dockerfile
@@ -37,7 +37,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: dockerfile-linter linter
-      id: dockerfile
+      id: dockerfile-linter-linter
       uses: ./dockerfile-linter
       with:
         dockerfile: ./dockerfile-linter/Dockerfile
