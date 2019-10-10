@@ -20,11 +20,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: Hello world docker action step
-        id: hello
-        uses: ./.github/actions/hello-world-docker
+      - name: Dockerfile linter
+        id: dockerfile
+        uses: ./.github/actions/dockerfile-linter
         with:
-          who-to-greet: 'Patientsky'
+          dockerfile: "./.github/actions/dockerfile-linter/Dockerfile"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Use the output from the `hello` step
       - name: Get the output time
