@@ -22,7 +22,7 @@ jobs:
 
       - name: Hello world docker action step
         id: hello
-        uses: ./.github/actions/hello-world-docker-action
+        uses: ./.github/actions/hello-world-docker
         with:
           who-to-greet: 'Patientsky'
 
