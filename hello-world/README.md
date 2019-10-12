@@ -1,4 +1,4 @@
-# Hello world docker action
+# Hello world action
 
 This action prints "Hello World" or "Hello" + the name of a person to greet to the log.
 
@@ -30,9 +30,9 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@master
-      - name: Hello World Docker
-        id: hello-world-docker
-        uses: pasientskyhosting/github-actions/hello-world-docker@v1
+      - name: Hello World
+        id: hello-world
+        uses: pasientskyhosting/github-actions/hello-world@v1
         with:
           who-to-greet: 'Mona the Octocat'
 ```
