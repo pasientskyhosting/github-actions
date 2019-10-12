@@ -43,3 +43,11 @@ jobs:
         dockerfile: ./dockerfile-linter/Dockerfile
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: golangci-lint linter
+      id: golangci-lint-linter
+      uses: ./dockerfile-linter
+      with:
+        dockerfile: ./golangci-lint/Dockerfile
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
