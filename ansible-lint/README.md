@@ -1,14 +1,6 @@
-# Dockerfile linter
+# ansible-lint
 
-Lint a Dockerfile, or many Dockerfiles.
-
-## Inputs
-
-### `dockerfile`
-
-**Required** Path to dockerfile. Default `./Dockerfile`
-
-## Outputs
+> Run ansible-lint
 
 ## Usage
 
@@ -26,11 +18,17 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@master
-      - name: dockerfile-linter linter
-        id: dockerfile-linter-linter
-        uses: pasientskyhosting/github-actions/dockerfile-linter@v1
+      - name: ansible-lint
+        id: ansible-lint
+        uses: pasientskyhosting/github-actions/ansible-lint@v1
         with:
           dockerfile: ./path/to/project/Dockerfile
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
+
+## Required Arguments
+
+- `repo_name` : docker hub repo
+- `username` : docket hub user name for push docker image
+- `password` : docket hub user password for push docker image
