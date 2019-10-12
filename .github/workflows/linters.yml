@@ -28,11 +28,11 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: hello-world-docker linter
-      id: hello-world-docker-linter
+    - name: hello-world linter
+      id: hello-world-linter
       uses: ./dockerfile-linter
       with:
-        dockerfile: ./hello-world-docker/Dockerfile
+        dockerfile: ./hello-world/Dockerfile
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -41,5 +41,13 @@ jobs:
       uses: ./dockerfile-linter
       with:
         dockerfile: ./dockerfile-linter/Dockerfile
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: golangci-lint linter
+      id: golangci-lint-linter
+      uses: ./dockerfile-linter
+      with:
+        dockerfile: ./golangci-lint/Dockerfile
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
