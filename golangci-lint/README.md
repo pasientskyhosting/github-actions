@@ -53,8 +53,6 @@ jobs:
 
 ### Advanced Usage Example
 
-#### [.github/workflows/reviewdog.yml](.github/workflows/reviewdog.yml)
-
 ```yml
 name: reviewdog
 on: [pull_request]
@@ -111,8 +109,6 @@ jobs:
 ```
 
 ### All-in-one golangci-lint configuration without config file
-
-#### [.github/workflows/reviewdog.yml](.github/workflows/reviewdog.yml)
 
 ```yml
 name: reviewdog
