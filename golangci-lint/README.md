@@ -32,8 +32,6 @@ It's same as `-level` flag of reviewdog.
 
 ### Minimum Usage Example
 
-#### [.github/workflows/reviewdog.yml](.github/workflows/reviewdog.yml)
-
 ```yml
 name: reviewdog
 on: [pull_request]
