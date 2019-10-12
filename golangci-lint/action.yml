@@ -18,7 +18,7 @@ inputs:
     description: 'Report level for reviewdog [info,warning,error]'
     default: 'error'
 
-    runs:
+runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
