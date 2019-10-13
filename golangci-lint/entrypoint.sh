@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Using go get: $INPUT_GO_GET"
+
 cd "$GITHUB_WORKSPACE"
 
 export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
