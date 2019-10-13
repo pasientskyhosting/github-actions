@@ -28,6 +28,12 @@ actions with different config.
 Optional. Report level for reviewdog [info,warning,error].
 It's same as `-level` flag of reviewdog.
 
+### `level`
+
+Optional. Downloads the packages named by the import paths.
+Default `no`
+
+
 ## Example usage
 
 ### Minimum Usage Example
