@@ -1,14 +1,14 @@
 #!/bin/bash
 
-echo "Using go get: $INPUT_GO_GET"
+echo $INPUT_GO_GET
 
 cd "$GITHUB_WORKSPACE"
 
 export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
 
 # see if we need to get dependencies
-if [ "$INPUT_GO_GET" = "yes" ] || [ "$INPUT_GO_GET" = "true" ]; then
-    go get -d
+if [ "$INPUT_GO_GET" != "no" ] && [ "$INPUT_GO_GET" != "false" ]; then
+    go get -d ${INPUT_GO_GET}
 fi
 
 golangci-lint run --out-format line-number ${INPUT_GOLANGCI_LINT_FLAGS} \
