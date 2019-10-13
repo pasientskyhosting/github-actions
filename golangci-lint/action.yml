@@ -17,6 +17,9 @@ inputs:
   level:
     description: 'Report level for reviewdog [info,warning,error]'
     default: 'error'
+  go_get:
+    description: 'Downloads the packages named by the import paths'
+    default: 'no'
 
 runs:
   using: 'docker'
