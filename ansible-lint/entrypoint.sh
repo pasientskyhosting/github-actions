@@ -11,6 +11,8 @@ cd "${GITHUB_WORKSPACE}"
 
 ACTION_PLAYBOOK_PATH="${GITHUB_WORKSPACE}/${ACTION_PLAYBOOK_NAME}"
 
+echo "Looking in: $ACTION_PLAYBOOK_PATH"
+
 if [ ! -f "${ACTION_PLAYBOOK_PATH}" -a ! -d "${ACTION_PLAYBOOK_PATH}" ]; then
   >&2 echo "==> Can't find '${ACTION_PLAYBOOK_PATH}'.
     Please ensure to set up input `playbook_name` env var
