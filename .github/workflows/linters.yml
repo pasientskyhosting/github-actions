@@ -22,7 +22,7 @@ jobs:
 
     - name: ansible-lint linter
       id: ansible-lint-linter
-      uses: ./ansible-lint
+      uses: ./dockerfile-linter
       with:
         dockerfile: ./ansible-lint/Dockerfile
       env:
