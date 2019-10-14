@@ -1,4 +1,4 @@
-# docker-build-push
+# docker-publish
 
 > docker build and push to docker-hub only push tag
 
@@ -13,12 +13,12 @@ on:
 
 jobs:
 
-  build-push:
+  docker_publish_job:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@master
       - name: Buld and publish to registry
-        uses: actions/docker-tag-build-push-action@master
+        uses: pasientskyhosting/github-actions/docker-publish@v0.6
         with:
           repo_name: myRepo/imageName
           username: ${{ secrets.DOCKER_USERNAME }}
