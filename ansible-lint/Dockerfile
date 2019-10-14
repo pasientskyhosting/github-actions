@@ -1,15 +1,17 @@
-FROM yokogawa/ansible-lint:latest
-LABEL maintainer="Karsten Jakobsen <kj@patientsky.com>"
+FROM python:3.7-slim
 
-LABEL "com.github.actions.name"="Ansible Lint"
-LABEL "com.github.actions.description"="Run ansible-lint"
-LABEL "com.github.actions.icon"="package"
-LABEL "com.github.actions.color"="red"
+LABEL "maintainer"="kj@patientsky.com <kj@patientsky.com>"
 LABEL "repository"="https://github.com/pasientskyhosting/github-actions"
+LABEL "homepage"="https://github.com/pasientskyhosting/github-actions"
 
-RUN apk --no-cache add \
-    jq \
-    curl
+LABEL "com.github.actions.name"="ansible-lint"
+LABEL "com.github.actions.description"="Run Ansible Lint"
+LABEL "com.github.actions.icon"="activity"
+LABEL "com.github.actions.color"="gray-dark"
 
-COPY entrypoint.sh /entrypoint.sh
+RUN pip install ansible-lint
+
+ADD entrypoint.sh /entrypoint.sh
+RUN chmod 755 /entrypoint.sh
+
 ENTRYPOINT ["/entrypoint.sh"]
