@@ -23,7 +23,7 @@ fi
 
 if [ -z "$INPUT_TAG" ]; then
   # refs/tags/v1.2.0
-  $INPUT_TAG=$(echo ${GITHUB_REF} | sed -e "s/refs\/tags\///g")
+  INPUT_TAG="$(echo ${GITHUB_REF} | sed -e "s/refs\/tags\///g")"
 fi
 
 echo ${INPUT_PASSWORD} | docker login -u ${INPUT_USERNAME} --password-stdin ${INPUT_REGISTRY}
