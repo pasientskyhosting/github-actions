@@ -24,9 +24,11 @@ fi
 >&2 echo "==> Linting ${ACTION_PLAYBOOK_PATH}…"
 
 if [ -d "${ACTION_PLAYBOOK_PATH}" ]; then
-  ansible-lint `find "${ACTION_PLAYBOOK_PATH}" -type f -name playbook.yml`
+  ansible-lint `find "${ACTION_PLAYBOOK_PATH}" -type f -name playbook.yml` \
+  | reviewdog -efm="%f:%l: %m" -name="${INPUT_TOOL_NAME}" -reporter=github-pr-check -level="${INPUT_LEVEL}"
 else
-  ansible-lint "${ACTION_PLAYBOOK_PATH}"
+  ansible-lint "${ACTION_PLAYBOOK_PATH}" \
+  | reviewdog -efm="%f:%l: %m" -name="${INPUT_TOOL_NAME}" -reporter=github-pr-check -level="${INPUT_LEVEL}"
 fi
 
 >&2 echo

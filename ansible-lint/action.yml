@@ -8,6 +8,9 @@ inputs:
     description: 'Name of playbook to lint'
     required: true 
     default: 'playbook.yml'
+  tool_name:
+    description: 'Tool name to use for reviewdog reporter'
+    default: 'ansible_lint_output'
   
 outputs:
 
@@ -16,3 +19,4 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.playbook_name }}
+    - ${{ inputs.tool_name }}
