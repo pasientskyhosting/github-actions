@@ -20,6 +20,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
+    - name: ansible-lint linter
+      id: ansible-lint-linter
+      uses: ./ansible-lint
+      with:
+        dockerfile: ./ansible-lint/Dockerfile
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: docker-publish linter
       id: docker-publish-linter
       uses: ./dockerfile-linter
@@ -36,8 +44,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: dockerfile-linter linter
-      id: dockerfile-linter-linter
+    - name: dockerfile-lint linter
+      id: dockerfile-lint-linter
       uses: ./dockerfile-linter
       with:
         dockerfile: ./dockerfile-linter/Dockerfile
