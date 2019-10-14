@@ -29,7 +29,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.repo-name }}
+    - ${{ inputs.repo_name }}
     - ${{ inputs.username }}
     - ${{ inputs.password }}
     - ${{ inputs.registry }}
