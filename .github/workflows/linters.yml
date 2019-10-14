@@ -20,11 +20,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
-    - name: docker-build-push linter
-      id: docker-build-push-linter
+    - name: docker-publish linter
+      id: docker-publish-linter
       uses: ./dockerfile-linter
       with:
-        dockerfile: ./docker-build-push/Dockerfile
+        dockerfile: ./docker-publish/Dockerfile
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
