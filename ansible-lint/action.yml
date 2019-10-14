@@ -5,9 +5,9 @@ description: 'Run ansible-lint'
 
 inputs:
   playbook_name:
-  description: 'Name of playbook to lint'
-  required: true 
-  default: 'playbook.yml'
+    description: 'Name of playbook to lint'
+    required: true 
+    default: 'playbook.yml'
   
 outputs:
 
