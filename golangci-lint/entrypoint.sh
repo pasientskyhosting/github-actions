@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo $INPUT_GO_GET
+echo $INPUT_LEVEL
 
 cd "$GITHUB_WORKSPACE"
 
