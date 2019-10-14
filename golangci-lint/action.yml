@@ -13,7 +13,7 @@ inputs:
     default: ''
   tool_name:
     description: 'Tool name to use for reviewdog reporter'
-    default: 'golangci'
+    default: 'golangci_lint_output'
   level:
     description: 'Report level for reviewdog [info,warning,error]'
     default: 'error'
