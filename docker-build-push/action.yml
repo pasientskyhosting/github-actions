@@ -19,7 +19,7 @@ inputs:
     default: 'docker.io'
   image_tag:
     description: Override docker image tag instead of using github release tag
-    require: false
+    default: ''
   build_context:
     description: the path in your repo that will serve as the build context
     default: './'
@@ -31,7 +31,7 @@ inputs:
     default: 'true'
   dockerfile_path:
     description: the full path (including the filename) to the dockerfile that you want to build
-    default: ./Dockerfile
+    default: './Dockerfile'
 
 outputs:
   IMAGE_FULL_NAME:
