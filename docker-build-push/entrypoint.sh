@@ -26,7 +26,7 @@ if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
     exit 1
   fi
 
-  # The following environment variables will be provided by the environment automatically: GITHUB_REPOSITORY, GITHUB_REF, GITHUB_SHA
+  # The following environment variables will be provided by the environment automatically: GITHUB_REF, GITHUB_SHA
   if [ -z "$INPUT_IMAGE_TAG" ]; then
     # refs/tags/v1.2.0
     INPUT_IMAGE_TAG="$(echo ${GITHUB_REF} | sed -e "s/refs\/tags\///g")"
@@ -51,7 +51,7 @@ if [[ -z "$INPUT_BUILD_CONTEXT" ]]; then
 	exit 1
 fi
 
-IMAGE_NAME="${GITHUB_REPOSITORY}/${INPUT_IMAGE_NAME}:${INPUT_IMAGE_TAG}"
+IMAGE_NAME="${INPUT_IMAGE_NAME}:${INPUT_IMAGE_TAG}"
 
 # Build The Container
 docker build \
