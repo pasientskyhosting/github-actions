@@ -50,10 +50,12 @@ if [[ -z "$INPUT_BUILD_CONTEXT" ]]; then
 fi
 
 IMAGE_NAME="${GITHUB_REPOSITORY}/${INPUT_IMAGE_NAME}:${INPUT_IMAGE_TAG}"
-BUILDPARAMS=${INPUT_BUILDPARAMS}
 
 # Build The Container
-docker build $BUILDPARAMS -t ${IMAGE_NAME} -f ${INPUT_DOCKERFILE_PATH} ${INPUT_BUILD_CONTEXT}
+docker build \
+--build-arg version="${INPUT_IMAGE_TAG}" \
+-t ${IMAGE_NAME} \
+-f ${INPUT_DOCKERFILE_PATH} ${INPUT_BUILD_CONTEXT}
 
 if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
 

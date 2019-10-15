@@ -35,7 +35,6 @@ jobs:
 - `image_tag` : Override docker image tag instead of using github release tag
 - `build_context` : the path in your repo that will serve as the build context **required** `default: './'`
 - `build_only` : do not push image to registry. Only do a test build **required** `default: 'true'`
-- `build_params` : Docker build params `default: ''`
 - `dockerfile_path` : the full path (including the filename) to the dockerfile that you want to build **required** `default: ./Dockerfile`
 
 ## Outputs

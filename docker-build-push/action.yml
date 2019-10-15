@@ -29,10 +29,6 @@ inputs:
     description: do not push image to registry. Only do a test build
     require: true
     default: 'true'
-  build_params:
-    description: Docker build params
-    require: false
-    default: ''
   dockerfile_path:
     description: the full path (including the filename) to the dockerfile that you want to build
     require: true
