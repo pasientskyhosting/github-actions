@@ -1,0 +1,33 @@
+---
+
+# Runs your workflow anytime the release event occurs  
+name: Release
+on:
+  release:
+    types: [published]
+
+jobs:
+
+  docker_publish:
+
+    name: docker_publish_job
+    runs-on: ubuntu-18.04
+    strategy:
+      # When set to true, GitHub cancels all in-progress jobs if any matrix job fails. Default: true
+      fail-fast: false
+      matrix:
+        action: [ 'ansible-lint', 'golangci-lint' ]
+
+    steps:
+
+      - name: Check out code
+        uses: actions/checkout@v1
+
+      - name: docker-publish
+        id: docker-publish
+        uses: ./docker-publish
+        with:
+          repo_name: pasientskyhosting/action-${{ matrix.action }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          dockerfile: ./${{ matrix.action }}/Dockerfile

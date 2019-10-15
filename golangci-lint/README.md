@@ -1,40 +1,10 @@
-# GitHub Action: Run golangci-lint with reviewdog
+# golangci-lint with reviewdog
 
 This action runs [golangci-lint](https://github.com/golangci/golangci-lint) with
 [reviewdog](https://github.com/reviewdog/reviewdog) on pull requests to improve
 code review experience.
 
-## Inputs
-
-### `github_token`
-
-**Required**. Must be in form of `github_token: ${{ secrets.github_token }}`'.
-
-### `golangci_lint_flags`
-
-Optional. golangci-lint flags. (golangci-lint run --out-format=line-number
-`<golangci_lint_flags>`)
-
-Note that you can change golangci-lint behavior by [configuration
-file](https://github.com/golangci/golangci-lint#configuration) too.
-
-### `tool_name`
-
-Optional. Tool name to use for reviewdog reporter. Useful when running multiple
-actions with different config.
-
-### `level`
-
-Optional. Report level for reviewdog [info,warning,error].
-It's same as `-level` flag of reviewdog.
-
-### `level`
-
-Optional. Downloads the packages named by the import paths.
-Default `no`
-
-
-## Example usage
+## Usage
 
 ### Minimum Usage Example
 
@@ -49,8 +19,7 @@ jobs:
       - name: Check out code into the Go module directory
         uses: actions/checkout@v1
       - name: golangci-lint
-        uses: pasientskyhosting/action-golangci-lint@v1
-        # uses: docker://pasientskyhosting/action-golangci-lint:v1 # pre-build docker image
+        uses: pasientskyhosting/github-actions/golangci-lint@v1
         with:
           github_token: ${{ secrets.github_token }}
 ```
@@ -71,10 +40,7 @@ jobs:
       - name: Check out code into the Go module directory
         uses: actions/checkout@v1
       - name: golangci-lint
-        uses: docker://pasientskyhosting/action-golangci-lint:v1 # Pre-built image
-        # uses: pasientskyhosting/action-golangci-lint@v1 # Build with Dockerfile
-        # uses: docker://pasientskyhosting/action-golangci-lint:v1.0.2 # Can use specific version.
-        # uses: pasientskyhosting/action-golangci-lint@v1.0.2 # Can use specific version.
+        uses: pasientskyhosting/github-actions/golangci-lint@v1
         with:
           github_token: ${{ secrets.github_token }}
           # Can pass --config flag to change golangci-lint behavior and target
@@ -89,7 +55,7 @@ jobs:
       - name: Check out code into the Go module directory
         uses: actions/checkout@v1
       - name: golint
-        uses: pasientskyhosting/action-golangci-lint@v1
+        uses: pasientskyhosting/github-actions/golangci-lint@v1
         with:
           github_token: ${{ secrets.github_token }}
           golangci_lint_flags: "--disable-all -E golint"
@@ -104,7 +70,7 @@ jobs:
       - name: Check out code into the Go module directory
         uses: actions/checkout@v1
       - name: errcheck
-        uses: pasientskyhosting/action-golangci-lint@v1
+        uses: pasientskyhosting/github-actions/golangci-lint@v1
         with:
           github_token: ${{ secrets.github_token }}
           golangci_lint_flags: "--disable-all -E errcheck"
@@ -125,8 +91,16 @@ jobs:
       - name: Check out code into the Go module directory
         uses: actions/checkout@v1
       - name: golangci-lint
-        uses: pasientskyhosting/action-golangci-lint@v1
+        uses: pasientskyhosting/github-actions/golangci-lint@v1
         with:
           github_token: ${{ secrets.github_token }}
           golangci_lint_flags: "--enable-all --exclude-use-default=false"
 ```
+
+## Inputs
+
+- `github_token` : GITHUB_TOKEN **required**
+- `golangci_lint_flags` : golangci-lint flags. (golangci-lint run --out-format=line-number <golangci_lint_flags>)
+- `tool_name` : Tool name to use for reviewdog reporter `default='golangci_lint_output'`
+- `level` : Report level for reviewdog [info,warning,error] `default='error'`
+- `go_get` : Downloads the packages named by the import paths `default='no'`

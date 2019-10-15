@@ -20,15 +20,15 @@ jobs:
       - uses: actions/checkout@master
       - name: ansible-lint
         id: ansible-lint
-        uses: pasientskyhosting/github-actions/ansible-lint@v1
+        uses: pasientskyhosting/github-actions/ansible-lint@master
         with:
-          dockerfile: ./path/to/project/Dockerfile
+          playbook_name: "playbook.yml"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-## Required Arguments
+## Inputs
 
-- `repo_name` : docker hub repo
-- `username` : docket hub user name for push docker image
-- `password` : docket hub user password for push docker image
+- `github_token` : 'GITHUB_TOKEN' **required**
+- `playbook_name` : Name of playbook to lint **required**
+- `tool_name:` : Reviewdog identifier `default=ansible_lint_output`

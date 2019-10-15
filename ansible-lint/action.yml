@@ -4,9 +4,23 @@ name: 'Ansible Lint'
 description: 'Run ansible-lint'
 
 inputs:
+  github_token:
+    description: 'GITHUB_TOKEN.'
+    required: true
+  playbook_name:
+    description: 'Name of playbook to lint'
+    required: true 
+    default: 'playbook.yml'
+  tool_name:
+    description: 'Reviewdog identifier'
+    default: 'ansible_lint'
   
 outputs:
 
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - ${{ inputs.github_token }}
+    - ${{ inputs.playbook_name }}
+    - ${{ inputs.tool_name }}
