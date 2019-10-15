@@ -1,5 +1,7 @@
 # Awesome Actions
 
+![](https://github.com/pasientskyhosting/github-actions/workflows/Release/badge.svg) ![](https://github.com/pasientskyhosting/github-actions/workflows/Linters/badge.svg)
+
 <p align="center">
   <br>
     <img src="https://image.ibb.co/cZ1q5f/awesome-actions.jpg" />
