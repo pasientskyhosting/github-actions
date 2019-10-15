@@ -23,11 +23,12 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v1
 
-      - name: docker-publish
-        id: docker-publish
-        uses: ./docker-publish
+      - name: Docker Build
+        uses: ./docker-build-push
         with:
-          repo_name: pasientskyhosting/action-${{ matrix.action }}
+          image_name: pasientskyhosting/action-${{ matrix.action }}
+          build_only: 'false'
+          build_context: ./${{ matrix.action }}
+          dockerfile_path: ./${{ matrix.action }}/Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          dockerfile: ./${{ matrix.action }}/Dockerfile
