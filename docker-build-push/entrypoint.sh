@@ -58,6 +58,7 @@ IMAGE_NAME_LATEST="${INPUT_IMAGE_NAME}:latest"
 docker build \
 --build-arg version="${INPUT_IMAGE_TAG}" \
 -t ${IMAGE_NAME} \
+-t ${IMAGE_NAME_LATEST} \
 -f ${INPUT_DOCKERFILE_PATH} ${INPUT_BUILD_CONTEXT}
 
 if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
@@ -71,8 +72,6 @@ if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
   if [[ "$INPUT_PUSH_TAG_LATEST" == "true" ]]; then
     docker push ${INPUT_IMAGE_REGISTRY}/${IMAGE_NAME_LATEST}
   fi
-
-  push_tag_latest
 
 fi 
 

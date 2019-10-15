@@ -14,9 +14,9 @@ jobs:
 
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
-        action: [ 'ansible-lint', 'golangci-lint' ]
+        action: [ 'ansible-lint', 'golangci-lint', 'dockerfile-linter' ]
 
     name: Docker Build
     steps:
