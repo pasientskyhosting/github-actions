@@ -62,14 +62,14 @@ docker build \
 if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
 
   # send credentials through stdin (it is more secure)
-  echo ${INPUT_PASSWORD} | docker login -u ${INPUT_USERNAME} --password-stdin ${IMAGE_REGISTRY}
+  echo ${INPUT_PASSWORD} | docker login -u ${INPUT_USERNAME} --password-stdin ${INPUT_IMAGE_REGISTRY}
 
   # Push two versions, with and without the SHA
-  docker push ${IMAGE_REGISTRY}/${IMAGE_NAME}
+  docker push ${INPUT_IMAGE_REGISTRY}/${IMAGE_NAME}
 
 fi 
 
 time=$(date)
 
-echo "::set-output name=IMAGE_FULL_NAME::${IMAGE_REGISTRY}/${IMAGE_NAME}"
+echo "::set-output name=IMAGE_FULL_NAME::${INPUT_IMAGE_REGISTRY}/${IMAGE_NAME}"
 echo "::set-output name=IMAGE_BUILD_TIME::${time}"

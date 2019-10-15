@@ -10,8 +10,8 @@ LABEL "com.github.actions.icon"="activity"
 LABEL "com.github.actions.color"="gray-dark"
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    curl && \
+    apt-get install -y \
+    curl gcc libffi-dev && \
     rm -rf /var/lib/apt/lists/*
 
 RUN pip install ansible-lint 
