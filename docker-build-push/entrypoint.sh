@@ -8,6 +8,9 @@ set -e
 
 echo "===> Running version: $VERSION"
 
+# The following environment variables will be provided by the environment automatically: GITHUB_WORKSPACE, GITHUB_REF, GITHUB_SHA
+cd "${GITHUB_WORKSPACE}"
+
 # DESCRIPTION: NAME OF THE DOCKER REGISTRY
 # DEFAULT: 'docker.io'
 INPUT_IMAGE_REGISTRY=${INPUT_IMAGE_REGISTRY:-docker.io} 
@@ -42,14 +45,12 @@ if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
     exit 1
   fi
 
-  # The following environment variables will be provided by the environment automatically: GITHUB_REF, GITHUB_SHA
   if [ -z "$INPUT_IMAGE_TAG" ]; then
     # refs/tags/v1.2.0
     INPUT_IMAGE_TAG="$(echo ${GITHUB_REF} | sed -e "s/refs\/tags\///g")"
   fi
 
 else
-  # The following environment variables will be provided by the environment automatically: GITHUB_REF, GITHUB_SHA
   if [ -z "$INPUT_IMAGE_TAG" ]; then
     INPUT_IMAGE_TAG=$(echo "${GITHUB_SHA}" | cut -c1-12)
   fi
