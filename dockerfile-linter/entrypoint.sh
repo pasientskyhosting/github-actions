@@ -7,12 +7,11 @@ if [[ -z "$GITHUB_TOKEN" ]]; then
 fi
 
 cd $GITHUB_WORKSPACE
-DOCKERFILE=$1
 
-echo "Using $DOCKERFILE"
+echo "Using $INPUT_DOCKERFILE"
 set +e
 
-OUTPUT=$(/dockerfilelint/bin/dockerfilelint "$DOCKERFILE")
+OUTPUT=$(/dockerfilelint/bin/dockerfilelint "$INPUT_DOCKERFILE")
 SUCCESS=$?
 echo $OUTPUT
 
@@ -24,7 +23,7 @@ if [ $SUCCESS -ne 0 ]; then
   COMMENTS_URL=$(cat /github/workflow/event.json | jq -r .pull_request.comments_url)
   curl -s -S -H "Authorization: token $GITHUB_TOKEN" --header "Content-Type: application/json" --data "$PAYLOAD" "$COMMENTS_URL" > /dev/null
 else
-	echo $DOCKERFILE linting exited $SUCCESS
+	echo $INPUT_DOCKERFILE linting exited $SUCCESS
 fi
 
 exit $SUCCESS
