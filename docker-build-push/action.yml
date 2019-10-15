@@ -23,6 +23,7 @@ inputs:
   build_context:
     description: the path in your repo that will serve as the build context
     require: false
+    default: '.'
   push_tag_latest:
     description: Push the ':latest' tag as well
     default: 'true'

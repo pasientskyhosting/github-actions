@@ -24,6 +24,10 @@ INPUT_BUILD_ONLY=${INPUT_BUILD_ONLY:-true}
 # DEFAULT: './Dockerfile'
 INPUT_DOCKERFILE_PATH=${INPUT_DOCKERFILE_PATH:-./Dockerfile} 
 
+# DESCRIPTION: THE PATH IN YOUR REPO THAT WILL SERVE AS THE BUILD CONTEXT
+# DEFAULT: '.'
+INPUT_BUILD_CONTEXT=${INPUT_BUILD_CONTEXT:-.} 
+
 
 # check inputs
 if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
@@ -45,7 +49,10 @@ if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
   fi
 
 else
-  INPUT_IMAGE_TAG=$(echo "${GITHUB_SHA}" | cut -c1-12)
+  # The following environment variables will be provided by the environment automatically: GITHUB_REF, GITHUB_SHA
+  if [ -z "$INPUT_IMAGE_TAG" ]; then
+    INPUT_IMAGE_TAG=$(echo "${GITHUB_SHA}" | cut -c1-12)
+  fi
 fi
 
 if [[ -z "$INPUT_IMAGE_NAME" ]]; then
@@ -62,11 +69,7 @@ IMAGE_NAME="${INPUT_IMAGE_NAME}:${INPUT_IMAGE_TAG}"
 IMAGE_NAME_LATEST="${INPUT_IMAGE_NAME}:latest"
 
 # Build The Container
-docker build \
---build-arg version="${INPUT_IMAGE_TAG}" \
--t ${IMAGE_NAME} \
--t ${IMAGE_NAME_LATEST} \
--f ${INPUT_DOCKERFILE_PATH} ${INPUT_BUILD_CONTEXT}
+docker build --build-arg version="${INPUT_IMAGE_TAG}" -t ${IMAGE_NAME} -t ${IMAGE_NAME_LATEST} -f ${INPUT_DOCKERFILE_PATH} ${INPUT_BUILD_CONTEXT}
 
 if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
 
