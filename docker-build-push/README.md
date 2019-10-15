@@ -33,6 +33,7 @@ jobs:
 - `image_name` : name of the image.  Example - myContainer **required**
 - `image_registry` : Name of the docker registry **required** default: 'docker.io'
 - `image_tag` : Override docker image tag instead of using github release tag
+- `push_tag_latest` : Pushes the `latest`tag as well **required** `default: 'true'`
 - `build_context` : the path in your repo that will serve as the build context **required** `default: './'`
 - `build_only` : do not push image to registry. Only do a test build **required** `default: 'true'`
 - `dockerfile_path` : the full path (including the filename) to the dockerfile that you want to build **required** `default: ./Dockerfile`
