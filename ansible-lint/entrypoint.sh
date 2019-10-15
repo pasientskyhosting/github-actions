@@ -11,6 +11,6 @@ if [ ! -f "${ACTION_PLAYBOOK_PATH}" -a ! -d "${ACTION_PLAYBOOK_PATH}" ]; then
   exit 1
 fi
 
-echo "==> Linting ${ACTION_PLAYBOOK_PATH}"
+#echo "==> Linting ${ACTION_PLAYBOOK_PATH}"
 
-ansible-lint "${ACTION_PLAYBOOK_PATH}" --force-color -p -q
+ansible-lint ${ACTION_PLAYBOOK_PATH} -p | reviewdog -efm="%f:%l: %m" -name="ansible_lint_output" -reporter=github-check
