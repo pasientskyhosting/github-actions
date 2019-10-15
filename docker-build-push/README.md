@@ -20,7 +20,7 @@ jobs:
       - name: Build and publish to registry
         uses: pasientskyhosting/github-actions/docker-build-push@v1
         with:
-          repo_name: myRepo/imageName
+          image_name: myRepo/imageName
           build_only: 'false'
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -28,7 +28,6 @@ jobs:
 
 ## Inputs
 
-- `repo_name` : Docker repo name  **required**
 - `password` : Your registry password corresponding to write access to the repo where this action is called. **required**
 - `username` : Your registry password corresponding to write access to the repo where this action is called. **required**
 - `image_name` : name of the image.  Example - myContainer **required**
