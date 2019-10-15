@@ -24,6 +24,14 @@ if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
     exit 1
   fi
 
+  # The following environment variables will be provided by the environment automatically: GITHUB_REPOSITORY, GITHUB_REF, GITHUB_SHA
+  if [ -z "$INPUT_IMAGE_TAG" ]; then
+    # refs/tags/v1.2.0
+    INPUT_IMAGE_TAG="$(echo ${GITHUB_REF} | sed -e "s/refs\/tags\///g")"
+  fi
+
+else
+  INPUT_IMAGE_TAG=$(echo "${GITHUB_SHA}" | cut -c1-12)
 fi
 
 if [[ -z "$INPUT_IMAGE_NAME" ]]; then
@@ -41,17 +49,7 @@ if [[ -z "$INPUT_BUILD_CONTEXT" ]]; then
 	exit 1
 fi
 
-# The following environment variables will be provided by the environment automatically: GITHUB_REPOSITORY, GITHUB_REF
-if [ -z "$INPUT_IMAGE_TAG" ]; then
-  # refs/tags/v1.2.0
-  INPUT_IMAGE_TAG="$(echo ${GITHUB_REF} | sed -e "s/refs\/tags\///g")"
-fi
-
-# Set Local Variables
-shortSHA=$(echo "${GITHUB_SHA}" | cut -c1-12)
 IMAGE_NAME="${GITHUB_REPOSITORY}/${INPUT_IMAGE_NAME}:${INPUT_IMAGE_TAG}"
-
-# Add Arguments For Caching
 BUILDPARAMS=${INPUT_BUILDPARAMS}
 
 # Build The Container
@@ -64,7 +62,7 @@ if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
 
   # Push two versions, with and without the SHA
   docker push ${IMAGE_REGISTRY}/${IMAGE_NAME}
-  
+
 fi 
 
 time=$(date)
