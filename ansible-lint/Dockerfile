@@ -9,12 +9,7 @@ LABEL "com.github.actions.description"="Run Ansible Lint"
 LABEL "com.github.actions.icon"="activity"
 LABEL "com.github.actions.color"="gray-dark"
 
-RUN apt-get update && \
-    apt-get install -y \
-      curl
-
-RUN pip install ansible-lint 
-RUN curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh| sh -s
+RUN pip install ansible-lint
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
