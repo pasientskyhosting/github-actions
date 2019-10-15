@@ -22,8 +22,7 @@ if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
   fi
 
   if [[ -z "$INPUT_IMAGE_REGISTRY" ]]; then
-    echo "Set the IMAGE_REGISTRY input."
-    exit 1
+    INPUT_IMAGE_REGISTRY="docker.io"
   fi
 
   # The following environment variables will be provided by the environment automatically: GITHUB_REF, GITHUB_SHA
@@ -42,13 +41,11 @@ if [[ -z "$INPUT_IMAGE_NAME" ]]; then
 fi
 
 if [[ -z "$INPUT_DOCKERFILE_PATH" ]]; then
-	echo "Set the DOCKERFILE_PATH input."
-	exit 1
+	INPUT_DOCKERFILE_PATH="./Dockerfile"
 fi
 
 if [[ -z "$INPUT_BUILD_CONTEXT" ]]; then
-	echo "Set the BUILD_CONTEXT input."
-	exit 1
+  INPUT_BUILD_CONTEXT="./"
 fi
 
 IMAGE_NAME="${INPUT_IMAGE_NAME}:${INPUT_IMAGE_TAG}"
