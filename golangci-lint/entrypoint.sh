@@ -5,6 +5,8 @@ echo $INPUT_LEVEL
 
 cd "$GITHUB_WORKSPACE"
 
+echo "===> Running version: $VERSION"
+
 export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
 
 # see if we need to get dependencies

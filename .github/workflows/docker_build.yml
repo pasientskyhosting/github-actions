@@ -1,0 +1,35 @@
+---
+
+name: Docker Build
+
+on:
+  pull_request:
+    branches:
+    - master
+    - development
+
+jobs:
+
+  docker_build_job:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        action: [ 'ansible-lint', 'golangci-lint' ]
+
+    name: Docker Build
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: Docker Build
+      uses: ./docker-build-push
+      with:
+        image_name: pasientskyhosting/action-${{ matrix.action }}
+        build_only: 'true'
+        build_context: ./${{ matrix.action }}
+        dockerfile_path: ./${{ matrix.action }}/Dockerfile
+        
+   
