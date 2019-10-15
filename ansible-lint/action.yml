@@ -13,7 +13,7 @@ inputs:
     default: 'playbook.yml'
   tool_name:
     description: 'Reviewdog identifier'
-    default: 'ansible_lint_output'
+    default: 'ansible_lint'
   
 outputs:
 
