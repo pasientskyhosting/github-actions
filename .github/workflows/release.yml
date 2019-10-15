@@ -8,15 +8,15 @@ on:
 
 jobs:
 
-  docker_publish:
+  docker_build_push:
 
-    name: docker_publish_job
+    name: docker_build_push
     runs-on: ubuntu-18.04
     strategy:
       # When set to true, GitHub cancels all in-progress jobs if any matrix job fails. Default: true
       fail-fast: false
       matrix:
-        action: [ 'ansible-lint', 'golangci-lint' ]
+        action: [ 'ansible-lint', 'golangci-lint', 'dockerfile-linter' ]
 
     steps:
 
