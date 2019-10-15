@@ -8,6 +8,23 @@ set -e
 
 echo "===> Running version: $VERSION"
 
+# DESCRIPTION: NAME OF THE DOCKER REGISTRY
+# DEFAULT: 'docker.io'
+INPUT_IMAGE_REGISTRY=${INPUT_IMAGE_REGISTRY:-docker.io} 
+
+# DESCRIPTION: PUSH THE ':LATEST' TAG AS WELL
+# DEFAULT: 'true'
+INPUT_PUSH_TAG_LATEST=${INPUT_PUSH_TAG_LATEST:-true}
+
+# DESCRIPTION: DO NOT PUSH IMAGE TO REGISTRY. ONLY DO A TEST BUILD
+# DEFAULT: 'true'
+INPUT_BUILD_ONLY=${INPUT_BUILD_ONLY:-true} 
+
+# DESCRIPTION: THE FULL PATH (INCLUDING THE FILENAME) TO THE DOCKERFILE THAT YOU WANT TO BUILD
+# DEFAULT: './Dockerfile'
+INPUT_DOCKERFILE_PATH=${INPUT_DOCKERFILE_PATH:-./Dockerfile} 
+
+
 # check inputs
 if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
 
@@ -19,10 +36,6 @@ if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
   if [[ -z "$INPUT_PASSWORD" ]]; then
     echo "Set the PASSWORD input."
     exit 1
-  fi
-
-  if [[ -z "$INPUT_IMAGE_REGISTRY" ]]; then
-    INPUT_IMAGE_REGISTRY="docker.io"
   fi
 
   # The following environment variables will be provided by the environment automatically: GITHUB_REF, GITHUB_SHA
@@ -41,11 +54,8 @@ if [[ -z "$INPUT_IMAGE_NAME" ]]; then
 fi
 
 if [[ -z "$INPUT_DOCKERFILE_PATH" ]]; then
-	INPUT_DOCKERFILE_PATH="./Dockerfile"
-fi
-
-if [[ -z "$INPUT_BUILD_CONTEXT" ]]; then
-  INPUT_BUILD_CONTEXT=""
+	echo "Set the DOCKERFILE_PATH input."
+	exit 1
 fi
 
 IMAGE_NAME="${INPUT_IMAGE_NAME}:${INPUT_IMAGE_TAG}"
