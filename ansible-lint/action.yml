@@ -11,6 +11,9 @@ inputs:
     description: 'Name of playbook to lint'
     required: true 
     default: 'playbook.yml'
+  tool_name:
+    description: 'Reviewdog identifier'
+    default: 'ansible_lint_output'
   
 outputs:
 
@@ -20,3 +23,4 @@ runs:
   args:
     - ${{ inputs.github_token }}
     - ${{ inputs.playbook_name }}
+    - ${{ inputs.tool_name }}
