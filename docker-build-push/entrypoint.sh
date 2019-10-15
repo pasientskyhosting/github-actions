@@ -7,7 +7,7 @@
 set -e
 
 # check inputs
-if [ "$INPUT_BUILD_ONLY" == "false" || "$INPUT_BUILD_ONLY" == "no"  ]; then
+if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
 
   if [[ -z "$INPUT_USERNAME" ]]; then
     echo "Set the USERNAME input."
