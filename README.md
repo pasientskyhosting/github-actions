@@ -1,8 +1,8 @@
 # Awesome Actions
 
-![](https://github.com/pasientskyhosting/github-actions/workflows/.github/workflows/release.yml/badge.svg)
+![](https://github.com/pasientskyhosting/github-actions/workflows/Release/badge.svg)
 
-![](https://github.com/pasientskyhosting/github-actions/workflows/.github/workflows/linters.yml/badge.svg)
+![](https://github.com/pasientskyhosting/github-actions/workflows/Linters/badge.svg)
 
 <p align="center">
   <br>
