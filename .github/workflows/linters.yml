@@ -36,6 +36,14 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: docker-build-push linter
+      id: docker-build-push-linter
+      uses: ./dockerfile-linter
+      with:
+        dockerfile: ./docker-build-push/Dockerfile
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: hello-world linter
       id: hello-world-linter
       uses: ./dockerfile-linter

@@ -1,0 +1,49 @@
+---
+
+name: 'Docker Build/Push'
+description:  'Build and/or publish Docker image. Uses git tag if none given'
+author: Karsten Jakobsen <kj@patientsky.com>
+
+inputs:
+  password:
+    description: Your registry password corresponding to write access to the repo where this action is called.
+    required: true
+  username:
+    description: Your registry password corresponding to write access to the repo where this action is called.
+    require: true
+  image_name:
+    description: name of the image.  Example - myContainer
+    require: true
+  image_registry:
+    description: Name of the docker registry
+    require: true
+    default: 'docker.io'
+  image_tag:
+    description: Override docker image tag instead of using github release tag
+    require: false
+  build_context:
+    description: the path in your repo that will serve as the build context
+    require: true
+    default: './'
+  build_only:
+    description: do not push image to registry. Only do a test build
+    require: true
+    default: 'true'
+  dockerfile_path:
+    description: the full path (including the filename) to the dockerfile that you want to build
+    require: true
+    default: ./Dockerfile
+
+outputs:
+  IMAGE_FULL_NAME:
+    description: name of the Docker Image including the tag
+  IMAGE_BUILD_TIME:
+    description: time of image build
+
+branding:
+  color: 'blue'
+  icon: 'anchor'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

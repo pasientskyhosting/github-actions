@@ -11,11 +11,14 @@ LABEL "com.github.actions.color"="gray-dark"
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    curl && \
+    curl gcc libc6-dev libffi-dev && \
     rm -rf /var/lib/apt/lists/*
 
 RUN pip install ansible-lint 
 RUN curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh| sh -s
+
+ARG version=none
+ENV VERSION=$version
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
