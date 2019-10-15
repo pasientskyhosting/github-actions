@@ -25,6 +25,10 @@ inputs:
     description: the path in your repo that will serve as the build context
     require: true
     default: './'
+  push_tag_latest:
+    description: Push the ':latest' tag as well
+    require: true
+    default: 'true'
   build_only:
     description: do not push image to registry. Only do a test build
     require: true
