@@ -13,4 +13,4 @@ fi
 
 echo "==> Linting ${ACTION_PLAYBOOK_PATH}"
 
-ansible-lint "${ACTION_PLAYBOOK_PATH}"
+ansible-lint "${ACTION_PLAYBOOK_PATH}" --force-color -p -q
