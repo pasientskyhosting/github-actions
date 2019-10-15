@@ -17,6 +17,9 @@ RUN apt-get update && \
 RUN pip install ansible-lint 
 RUN curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh| sh -s
 
+ARG version=none
+ENV VERSION=$version
+
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
 

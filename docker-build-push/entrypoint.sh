@@ -6,6 +6,8 @@
 # exit when any command fails
 set -e
 
+echo "===> Running version: $VERSION"
+
 # check inputs
 if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
 

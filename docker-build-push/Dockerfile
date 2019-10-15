@@ -11,6 +11,9 @@ RUN apk update \
   && apk upgrade \
   && apk add --no-cache git
 
+ARG version=none
+ENV VERSION=$version
+
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
 
