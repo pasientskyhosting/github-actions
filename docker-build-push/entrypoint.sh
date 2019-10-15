@@ -47,9 +47,6 @@ if [ -z "$INPUT_IMAGE_TAG" ]; then
   INPUT_IMAGE_TAG="$(echo ${GITHUB_REF} | sed -e "s/refs\/tags\///g")"
 fi
 
-# send credentials through stdin (it is more secure)
-echo ${INPUT_PASSWORD} | docker login -u ${INPUT_USERNAME} --password-stdin ${IMAGE_REGISTRY}
-
 # Set Local Variables
 shortSHA=$(echo "${GITHUB_SHA}" | cut -c1-12)
 IMAGE_NAME="${GITHUB_REPOSITORY}/${INPUT_IMAGE_NAME}:${INPUT_IMAGE_TAG}"
@@ -60,9 +57,14 @@ BUILDPARAMS=${INPUT_BUILDPARAMS}
 # Build The Container
 docker build $BUILDPARAMS -t ${IMAGE_NAME} -f ${INPUT_DOCKERFILE_PATH} ${INPUT_BUILD_CONTEXT}
 
-if [ "$INPUT_BUILD_ONLY" == "false" || "$INPUT_BUILD_ONLY" == "no"  ]; then
+if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
+
+  # send credentials through stdin (it is more secure)
+  echo ${INPUT_PASSWORD} | docker login -u ${INPUT_USERNAME} --password-stdin ${IMAGE_REGISTRY}
+
   # Push two versions, with and without the SHA
   docker push ${IMAGE_REGISTRY}/${IMAGE_NAME}
+  
 fi 
 
 time=$(date)
