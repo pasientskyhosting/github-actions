@@ -27,6 +27,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-## Required Arguments
+## Inputs
 
-- `playbook_name` : Name of playbook to lint
+- `github_token` : 'GITHUB_TOKEN' **required**
+- `playbook_name` : Name of playbook to lint **required**
+- `tool_name:` : Reviewdog identifier `default=ansible_lint_output`

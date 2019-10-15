@@ -25,8 +25,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 ```
 
-## Required Arguments
+## Inputs
 
-- `repo_name` : docker hub repo
-- `username` : docket hub user name for push docker image
-- `password` : docket hub user password for push docker image
+- `repo_name` : Docker repo name  **required**
+- `username` : Docker hub user name for push docker image  **required**
+- `password` : Docker hub user password for push docker image  **required**
+- `registry` : Docker registry to push against **required** `default=docker.io`
+- `tag` : Override tag for docker image

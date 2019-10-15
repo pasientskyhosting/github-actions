@@ -2,14 +2,6 @@
 
 Lint a Dockerfile, or many Dockerfiles.
 
-## Inputs
-
-### `dockerfile`
-
-**Required** Path to dockerfile. Default `./Dockerfile`
-
-## Outputs
-
 ## Usage
 
 ```yaml
@@ -34,3 +26,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
+
+## Inputs
+
+- `dockerfile` : Path to Dockerfile **required** `default=./Dockerfile`
