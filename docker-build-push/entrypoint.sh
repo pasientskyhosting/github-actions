@@ -73,8 +73,6 @@ if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
     docker push ${INPUT_IMAGE_REGISTRY}/${IMAGE_NAME_LATEST}
   fi
 
-  push_tag_latest
-
 fi 
 
 time=$(date)
