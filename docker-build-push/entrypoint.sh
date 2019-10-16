@@ -8,6 +8,30 @@ set -e
 
 echo "===> Running version: $VERSION"
 
+# The following environment variables will be provided by the environment automatically: GITHUB_WORKSPACE, GITHUB_REF, GITHUB_SHA
+cd "${GITHUB_WORKSPACE}"
+
+# DESCRIPTION: NAME OF THE DOCKER REGISTRY
+# DEFAULT: 'docker.io'
+INPUT_IMAGE_REGISTRY=${INPUT_IMAGE_REGISTRY:-docker.io} 
+
+# DESCRIPTION: PUSH THE ':LATEST' TAG AS WELL
+# DEFAULT: 'true'
+INPUT_PUSH_TAG_LATEST=${INPUT_PUSH_TAG_LATEST:-true}
+
+# DESCRIPTION: DO NOT PUSH IMAGE TO REGISTRY. ONLY DO A TEST BUILD
+# DEFAULT: 'true'
+INPUT_BUILD_ONLY=${INPUT_BUILD_ONLY:-true} 
+
+# DESCRIPTION: THE FULL PATH (INCLUDING THE FILENAME) TO THE DOCKERFILE THAT YOU WANT TO BUILD
+# DEFAULT: './Dockerfile'
+INPUT_DOCKERFILE_PATH=${INPUT_DOCKERFILE_PATH:-./Dockerfile} 
+
+# DESCRIPTION: THE PATH IN YOUR REPO THAT WILL SERVE AS THE BUILD CONTEXT
+# DEFAULT: '.'
+INPUT_BUILD_CONTEXT=${INPUT_BUILD_CONTEXT:-.} 
+
+
 # check inputs
 if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
 
@@ -21,19 +45,15 @@ if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
     exit 1
   fi
 
-  if [[ -z "$INPUT_IMAGE_REGISTRY" ]]; then
-    echo "Set the IMAGE_REGISTRY input."
-    exit 1
-  fi
-
-  # The following environment variables will be provided by the environment automatically: GITHUB_REF, GITHUB_SHA
   if [ -z "$INPUT_IMAGE_TAG" ]; then
     # refs/tags/v1.2.0
     INPUT_IMAGE_TAG="$(echo ${GITHUB_REF} | sed -e "s/refs\/tags\///g")"
   fi
 
 else
-  INPUT_IMAGE_TAG=$(echo "${GITHUB_SHA}" | cut -c1-12)
+  if [ -z "$INPUT_IMAGE_TAG" ]; then
+    INPUT_IMAGE_TAG=$(echo "${GITHUB_SHA}" | cut -c1-12)
+  fi
 fi
 
 if [[ -z "$INPUT_IMAGE_NAME" ]]; then
@@ -46,20 +66,11 @@ if [[ -z "$INPUT_DOCKERFILE_PATH" ]]; then
 	exit 1
 fi
 
-if [[ -z "$INPUT_BUILD_CONTEXT" ]]; then
-	echo "Set the BUILD_CONTEXT input."
-	exit 1
-fi
-
 IMAGE_NAME="${INPUT_IMAGE_NAME}:${INPUT_IMAGE_TAG}"
 IMAGE_NAME_LATEST="${INPUT_IMAGE_NAME}:latest"
 
 # Build The Container
-docker build \
---build-arg version="${INPUT_IMAGE_TAG}" \
--t ${IMAGE_NAME} \
--t ${IMAGE_NAME_LATEST} \
--f ${INPUT_DOCKERFILE_PATH} ${INPUT_BUILD_CONTEXT}
+docker build --build-arg version="${INPUT_IMAGE_TAG}" -t ${IMAGE_NAME} -t ${IMAGE_NAME_LATEST} -f ${INPUT_DOCKERFILE_PATH} ${INPUT_BUILD_CONTEXT}
 
 if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
 

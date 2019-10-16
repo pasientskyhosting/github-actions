@@ -19,10 +19,11 @@ inputs:
     default: 'docker.io'
   image_tag:
     description: Override docker image tag instead of using github release tag
-    default: ''
+    require: false
   build_context:
     description: the path in your repo that will serve as the build context
-    default: './'
+    require: false
+    default: '.'
   push_tag_latest:
     description: Push the ':latest' tag as well
     default: 'true'
