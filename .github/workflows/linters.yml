@@ -24,7 +24,7 @@ jobs:
       id: ansible-lint-linter
       uses: ./dockerfile-linter
       with:
-        dockerfile: ./ansible-lint/Dockerfile
+        dockerfile_path: ./ansible-lint/Dockerfile
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -32,7 +32,7 @@ jobs:
       id: docker-build-push-linter
       uses: ./dockerfile-linter
       with:
-        dockerfile: ./docker-build-push/Dockerfile
+        dockerfile_path: ./docker-build-push/Dockerfile
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -40,7 +40,7 @@ jobs:
       id: hello-world-linter
       uses: ./dockerfile-linter
       with:
-        dockerfile: ./hello-world/Dockerfile
+        dockerfile_path: ./hello-world/Dockerfile
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -48,7 +48,7 @@ jobs:
       id: dockerfile-lint-linter
       uses: ./dockerfile-linter
       with:
-        dockerfile: ./dockerfile-linter/Dockerfile
+        dockerfile_path: ./dockerfile-linter/Dockerfile
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -56,6 +56,6 @@ jobs:
       id: golangci-lint-linter
       uses: ./dockerfile-linter
       with:
-        dockerfile: ./golangci-lint/Dockerfile
+        dockerfile_path: ./golangci-lint/Dockerfile
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
