@@ -6,12 +6,16 @@ if [[ -z "$GITHUB_TOKEN" ]]; then
 	exit 1
 fi
 
+# DESCRIPTION: THE FULL PATH (INCLUDING THE FILENAME) TO THE DOCKERFILE THAT YOU WANT TO BUILD
+# DEFAULT: './Dockerfile'
+INPUT_DOCKERFILE_PATH=${INPUT_DOCKERFILE_PATH:-./Dockerfile} 
+
 cd $GITHUB_WORKSPACE
 
-echo "Using $INPUT_DOCKERFILE"
+echo "Using $INPUT_DOCKERFILE_PATH"
 set +e
 
-OUTPUT=$(/dockerfilelint/bin/dockerfilelint "$INPUT_DOCKERFILE")
+OUTPUT=$(/dockerfilelint/bin/dockerfilelint "$INPUT_DOCKERFILE_PATH")
 SUCCESS=$?
 echo $OUTPUT
 
@@ -23,7 +27,7 @@ if [ $SUCCESS -ne 0 ]; then
   COMMENTS_URL=$(cat /github/workflow/event.json | jq -r .pull_request.comments_url)
   curl -s -S -H "Authorization: token $GITHUB_TOKEN" --header "Content-Type: application/json" --data "$PAYLOAD" "$COMMENTS_URL" > /dev/null
 else
-	echo $INPUT_DOCKERFILE linting exited $SUCCESS
+	echo $INPUT_DOCKERFILE_PATH linting exited $SUCCESS
 fi
 
 exit $SUCCESS

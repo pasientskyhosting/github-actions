@@ -4,7 +4,7 @@ name: 'Dockerfile Linter'
 description:  'Lint a Dockerfile, or many Dockerfiles'
 
 inputs:
-  dockerfile:
+  dockerfile_path:
     description: 'Path to Dockerfile'
     required: true
     default: './Dockerfile'
