@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Publish Docker Container To A Package Registry
-####################################################
+# Run pre-commit
+################
 
 # exit when any command fails
 set -e
