@@ -3,10 +3,22 @@
 name: 'pre-commit'
 description: 'Install and run pre-commit as a Github action'
 
-inputs: []
+---
 
-outputs: []
+name: 'Run pre-commit'
+description: 'Install and run pre-commit as a Github action'
+author: 'Karsten Jakobsen @karstenjakobsen'
+
+inputs:
+  level:
+    description: 'level'
+    required: false
+    default: ''
 
 runs:
   using: 'docker'
   image: 'Dockerfile'
+
+branding:
+  icon: 'check-circle'
+  color: 'blue'
