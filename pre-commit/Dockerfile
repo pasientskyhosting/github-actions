@@ -1,4 +1,9 @@
-FROM python:3.7-stretch
+FROM golang:alpine3.10
+
+RUN apk update --no-cache \
+    && apk add --no-cache \
+    py-pip \    
+    && rm -rf /var/cache/apk/*
 
 RUN pip install pre-commit
 
