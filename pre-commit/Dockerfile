@@ -1,6 +1,8 @@
-FROM ubuntu:18.04
+FROM golang:1.13.3-stretch
 
-RUN apt-get update &&  apt-get install -y python-pip
+RUN apt-get update &&  apt-get install -y \
+    python-pip \
+    git
 
 RUN pip install pre-commit
 
