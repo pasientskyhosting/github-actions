@@ -1,15 +1,16 @@
-FROM golang:1.13.3-stretch
+FROM docker:19.03.2
+LABEL maintainer="Karsten Jakobsen <kj@patientsky.com>"
 
-RUN apt-get update &&  apt-get install -y \
-    python-pip \
-    git
+RUN apk update \
+  && apk upgrade \
+  && apk add --no-cache git py-pip
 
 RUN pip install pre-commit
 
 ARG version=none
 ENV VERSION=$version
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+ADD entrypoint.sh /entrypoint.sh
+RUN chmod 755 /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
