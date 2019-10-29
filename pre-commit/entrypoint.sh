@@ -8,7 +8,7 @@ set -e
 
 echo "===> Running version: $VERSION"
 
-# The following environment variables will be provided by the environment automatically: GITHUB_WORKSPACE, GITHUB_REF, GITHUB_SHA
+# The following environment variables will be provided by the environment automatically: GITHUB_WORKSPACE
 mkdir -p $GITHUB_WORKSPACE
 cd "${GITHUB_WORKSPACE}"
 
