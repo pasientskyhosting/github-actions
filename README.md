@@ -16,3 +16,23 @@ Actions are triggered by GitHub platform events directly in a repo and run on-de
 
 ## Contents
 
+- [List Of Actions](#list-of-actions)
+  - [Testing and Linting](#testing-and-linting)
+  - [Docker](#docker)
+  - [Misc](#misc)
+
+## List Of Actions
+
+### Testing and Linting
+
+- [Ansible Lint w. Reviewdog](https://github.com/pasientskyhosting/github-actions/tree/master/ansible-lint)
+- [Dockerfile Linter](https://github.com/pasientskyhosting/github-actions/tree/master/dockerfile-linter)
+- [Golangci-lint w. Reviewdog](https://github.com/pasientskyhosting/github-actions/tree/master//golangci-lint)
+
+### Docker
+
+- [Build and Push Docker Images](https://github.com/pasientskyhosting/github-actions/tree/master/docker-build-push)
+
+### Misc
+
+- [Hello World](https://github.com/pasientskyhosting/github-actions/tree/master/hello-world)
