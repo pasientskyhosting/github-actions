@@ -16,7 +16,7 @@ jobs:
       # When set to true, GitHub cancels all in-progress jobs if any matrix job fails. Default: true
       fail-fast: false
       matrix:
-        action: [ 'ansible-lint', 'golangci-lint', 'dockerfile-linter', 'docker-build-push' ]
+        action: [ 'ansible-lint', 'golangci-lint', 'dockerfile-linter', 'docker-build-push', 'pre-commit' ]
 
     steps:
 
