@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        action: [ 'ansible-lint', 'golangci-lint', 'dockerfile-linter', 'docker-build-push' ]
+        action: [ 'ansible-lint', 'golangci-lint', 'dockerfile-linter', 'docker-build-push', 'pre-commit' ]
 
     name: Docker Build
     steps:
