@@ -2,6 +2,13 @@
 
 cd "$GITHUB_WORKSPACE"
 
+pwd
+
+ls -lastr
+
+which git
+which pre-commit
+
 echo "===> Running version: $VERSION"
 
 /usr/local/bin/pre-commit install
