@@ -1,0 +1,12 @@
+---
+
+name: 'pre-commit'
+description: 'Install and run pre-commit as a Github action'
+
+inputs:
+
+outputs:
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
