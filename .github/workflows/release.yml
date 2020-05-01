@@ -60,4 +60,4 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         push_tag_latest: 'false'
-        image_tag: ${{ matrix.python_version }}
+        image_tag: python-v${{ matrix.python_version }}
