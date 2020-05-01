@@ -1,14 +1,6 @@
-# Awesome Actions
+# Github Actions
 
 ![](https://github.com/pasientskyhosting/github-actions/workflows/Release/badge.svg) ![](https://github.com/pasientskyhosting/github-actions/workflows/Linters/badge.svg) ![](https://github.com/pasientskyhosting/github-actions/workflows/Docker%20Build/badge.svg)
-
-<p align="center">
-  <br>
-    <img src="https://image.ibb.co/cZ1q5f/awesome-actions.jpg" />
-  <br>
-  <br>
-  <br>
-</p>
 
 ## Description
 
@@ -28,6 +20,7 @@ Actions are triggered by GitHub platform events directly in a repo and run on-de
 - [Ansible Lint w. Reviewdog](https://github.com/pasientskyhosting/github-actions/tree/master/ansible-lint)
 - [Dockerfile Linter](https://github.com/pasientskyhosting/github-actions/tree/master/dockerfile-linter)
 - [Golangci-lint w. Reviewdog](https://github.com/pasientskyhosting/github-actions/tree/master//golangci-lint)
+- [Pre-commit](https://github.com/pasientskyhosting/github-actions/tree/master//pre-commit)
 
 ### Docker
 
