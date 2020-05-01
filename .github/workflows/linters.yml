@@ -11,50 +11,22 @@ jobs:
 
   dockerfile_lint:
 
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     name: Dockerfile Linters
+    strategy:
+      fail-fast: false
+      matrix:
+        action: [ 'ansible-lint', 'golangci-lint', 'dockerfile-linter', 'docker-build-push', 'docker-build-push']
 
     steps:
 
     - name: Checkout
-      uses: actions/checkout@master
+      uses: actions/checkout@v2
 
-    - name: ansible-lint linter
-      id: ansible-lint-linter
+    - name: dockerfile-linter
+      id: dockerfile-linter
       uses: ./dockerfile-linter
       with:
-        dockerfile_path: ./ansible-lint/Dockerfile
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: docker-build-push linter
-      id: docker-build-push-linter
-      uses: ./dockerfile-linter
-      with:
-        dockerfile_path: ./docker-build-push/Dockerfile
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: hello-world linter
-      id: hello-world-linter
-      uses: ./dockerfile-linter
-      with:
-        dockerfile_path: ./hello-world/Dockerfile
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: dockerfile-lint linter
-      id: dockerfile-lint-linter
-      uses: ./dockerfile-linter
-      with:
-        dockerfile_path: ./dockerfile-linter/Dockerfile
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: golangci-lint linter
-      id: golangci-lint-linter
-      uses: ./dockerfile-linter
-      with:
-        dockerfile_path: ./golangci-lint/Dockerfile
+        dockerfile_path: ./${{ matrix.action }}/Dockerfile
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
