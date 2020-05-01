@@ -53,4 +53,4 @@ jobs:
         build_only: 'true'
         build_context: ./pre-commit
         dockerfile_path: ./pre-commit/Dockerfile
-        docker_build_args: PYTHON_VERSION=${{ matrix.python_version }}
+        docker_build_args: --build-arg PYTHON_VERSION=${{ matrix.python_version }}
