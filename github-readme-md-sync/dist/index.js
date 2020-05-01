@@ -35275,7 +35275,7 @@ async function run () {
             ...options
           })
           .catch(validationErrors)
-        matter.data.category = category.body._id.replace(/\s+/g, '-').toLowerCase()
+        matter.data.category = category.body._id
         // Stripping the markdown extension from the filename and slug formatting
         const slug = markdown.data.name.replace(path.extname(markdown.data.name), '').replace(/\s+/g, '-').toLowerCase()
         const hash = markdown.data.sha
