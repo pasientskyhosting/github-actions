@@ -11,7 +11,6 @@ jobs:
 
   docker_build_job:
 
-    id: docker_build_job
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -35,7 +34,6 @@ jobs:
 
   docker_build_job_pre_commit:
 
-    id: docker_build_job_pre_commit
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
