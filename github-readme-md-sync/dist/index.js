@@ -35268,6 +35268,14 @@ async function run () {
           core.warning(markdown.data.path + ' was not synced (missing title/category front-matter)')
           return
         }
+        // get category id
+        category = await request
+          .get(`https://dash.readme.io/api/v1/categories/${matter.data.category.replace(/\s+/g, '-').toLowerCase()}`, {
+            json: true,
+            ...options
+          })
+          .catch(validationErrors)
+        matter.data.category = category.body._id.replace(/\s+/g, '-').toLowerCase()
         // Stripping the markdown extension from the filename and slug formatting
         const slug = markdown.data.name.replace(path.extname(markdown.data.name), '').replace(/\s+/g, '-').toLowerCase()
         const hash = markdown.data.sha

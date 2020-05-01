@@ -30,12 +30,12 @@ jobs:
 ```
 
 ## Meta data (front-matter)
-Only markdown files containing the appropriate metadata at the begging of the file can be synced. The `title` and `category` are required. Visibility of the page is determined by `hidden`. The `category` id can be found using the [ReadMe API](https://docs.readme.com/developers/reference/categories#getcategory)
+Only markdown files containing the appropriate metadata at the begging of the file can be synced. The `title` and `category` are required. The `category` must already exist in ReadMe. Visibility of the page is determined by `hidden`. 
 
 ```
 ---
 title: "My awesome document"
-category: "5eab21a51de76432ce5002db"
+category: "Getting started"
 hidden: false
 ---
 ```
