@@ -10,13 +10,14 @@ jobs:
 
   docker_build_push:
 
+    id: docker_build_push
     name: docker_build_push
     runs-on: ubuntu-18.04
     strategy:
       # When set to true, GitHub cancels all in-progress jobs if any matrix job fails. Default: true
       fail-fast: false
       matrix:
-        action: [ 'ansible-lint', 'golangci-lint', 'dockerfile-linter', 'docker-build-push', 'pre-commit' ]
+        action: [ 'ansible-lint', 'golangci-lint', 'dockerfile-linter', 'docker-build-push' ]
 
     steps:
 
@@ -32,3 +33,31 @@ jobs:
           dockerfile_path: ./${{ matrix.action }}/Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
+  docker_build_job_pre_commit:
+
+    id: docker_build_job_pre_commit
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        python_version: [ 3.5.9, 3.7.7 ]
+
+    name: Docker Build Pre Commit
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: Docker Build
+      uses: ./docker-build-push
+      with:
+        image_name: pasientskyhosting/action-pre-commit
+        build_only: 'false'
+        build_context: ./pre-commit
+        dockerfile_path: ./pre-commit/Dockerfile
+        docker-build-args: --build-arg PYTHON_VERSION=${{ matrix.python_version }}
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        push_tag_latest: 'false'
+        image_tag: ${{ matrix.python_version }}
