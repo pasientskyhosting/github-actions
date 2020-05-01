@@ -7,6 +7,7 @@
 set -e
 
 echo "===> Running version: $VERSION"
+echo "===> Custom build args: $INPUT_DOCKER_BUILD_ARGS"
 
 # The following environment variables will be provided by the environment automatically: GITHUB_WORKSPACE, GITHUB_REF, GITHUB_SHA
 cd "${GITHUB_WORKSPACE}"

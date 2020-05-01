@@ -34,7 +34,7 @@ inputs:
     description: the full path (including the filename) to the dockerfile that you want to build
     default: './Dockerfile'
   docker_build_args:
-    description: Custom build args to add. e.g '--build-arg PYTHON_VERSION=3.5.9'
+    description: Custom build args to add. e.g 'PYTHON_VERSION=3.5.9'
     default: ''
 
 outputs:
