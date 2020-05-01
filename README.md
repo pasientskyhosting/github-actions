@@ -29,3 +29,4 @@ Actions are triggered by GitHub platform events directly in a repo and run on-de
 ### Misc
 
 - [Hello World](https://github.com/pasientskyhosting/github-actions/tree/master/hello-world)
+- [Sync Markdown Files from GitHub to ReadMe](https://github.com/pasientskyhosting/github-actions/tree/master/github-readme-md-sync)
