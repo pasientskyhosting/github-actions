@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        action: [ 'ansible-lint', 'golangci-lint', 'dockerfile-linter', 'docker-build-push', 'pre-commit' ]
+        action: [ 'ansible-lint', 'golangci-lint', 'dockerfile-linter', 'docker-build-push']
 
     name: Docker Build
     steps:
@@ -30,5 +30,27 @@ jobs:
         build_only: 'true'
         build_context: ./${{ matrix.action }}
         dockerfile_path: ./${{ matrix.action }}/Dockerfile
-        
-   
+
+
+  docker_build_job_pre_commit:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        python_version: [ 3.5.9, 3.7.7 ]
+
+    name: Docker Build Pre Commit
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: Docker Build
+      uses: ./docker-build-push
+      with:
+        image_name: pasientskyhosting/action-pre-commit
+        build_only: 'true'
+        build_context: ./pre-commit
+        dockerfile_path: ./pre-commit/Dockerfile
+        docker_build_args: --build-arg PYTHON_VERSION=${{ matrix.python_version }}

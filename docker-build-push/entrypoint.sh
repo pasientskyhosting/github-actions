@@ -7,6 +7,7 @@
 set -e
 
 echo "===> Running version: $VERSION"
+echo "===> Custom build args: $INPUT_DOCKER_BUILD_ARGS"
 
 # The following environment variables will be provided by the environment automatically: GITHUB_WORKSPACE, GITHUB_REF, GITHUB_SHA
 cd "${GITHUB_WORKSPACE}"
@@ -70,7 +71,7 @@ IMAGE_NAME="${INPUT_IMAGE_NAME}:${INPUT_IMAGE_TAG}"
 IMAGE_NAME_LATEST="${INPUT_IMAGE_NAME}:latest"
 
 # Build The Container
-docker build --build-arg version="${INPUT_IMAGE_TAG}" -t ${IMAGE_NAME} -t ${IMAGE_NAME_LATEST} -f ${INPUT_DOCKERFILE_PATH} ${INPUT_BUILD_CONTEXT}
+docker build --build-arg version="${INPUT_IMAGE_TAG}" ${INPUT_DOCKER_BUILD_ARGS} -t ${IMAGE_NAME} -t ${IMAGE_NAME_LATEST} -f ${INPUT_DOCKERFILE_PATH} ${INPUT_BUILD_CONTEXT}
 
 if [[ "$INPUT_BUILD_ONLY" == "false" ]]; then
 
