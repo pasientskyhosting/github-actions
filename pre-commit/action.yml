@@ -5,10 +5,6 @@ description: 'Install and run pre-commit as a Github action'
 author: 'Karsten Jakobsen @karstenjakobsen'
 
 inputs:
-  level:
-    description: 'level'
-    required: false
-    default: ''
 
 runs:
   using: 'docker'
