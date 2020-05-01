@@ -20,7 +20,7 @@ Actions are triggered by GitHub platform events directly in a repo and run on-de
 - [Ansible Lint w. Reviewdog](https://github.com/pasientskyhosting/github-actions/tree/master/ansible-lint)
 - [Dockerfile Linter](https://github.com/pasientskyhosting/github-actions/tree/master/dockerfile-linter)
 - [Golangci-lint w. Reviewdog](https://github.com/pasientskyhosting/github-actions/tree/master//golangci-lint)
-- [Pre commit](https://github.com/pasientskyhosting/github-actions/tree/master//pre_commit)
+- [Pre-commit](https://github.com/pasientskyhosting/github-actions/tree/master//pre-commit)
 
 ### Docker
 
