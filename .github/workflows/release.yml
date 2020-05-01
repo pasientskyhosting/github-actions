@@ -10,7 +10,6 @@ jobs:
 
   docker_build_push:
 
-    id: docker_build_push
     name: docker_build_push
     runs-on: ubuntu-18.04
     strategy:
@@ -36,7 +35,6 @@ jobs:
 
   docker_build_job_pre_commit:
 
-    id: docker_build_job_pre_commit
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
