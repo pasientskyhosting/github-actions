@@ -54,7 +54,6 @@ async function run () {
       core.setFailed(err.message)
       return Promise.reject(err)
     }
-
     // create readme.io doc
     function createDoc (slug, file, hash, err) {
       if (err.statusCode !== 404) return Promise.reject(err.error)
@@ -66,7 +65,6 @@ async function run () {
         })
         .catch(validationErrors)
     }
-
     // update readme.io doc
     function updateDoc (slug, file, hash, existingDoc) {
       if (hash === existingDoc.lastUpdatedHash) {
@@ -85,7 +83,6 @@ async function run () {
     }
 
     return Promise.all(
-      
       files.map(async (gitFile) => {
         markdown = await client.repos.getContents({
           owner: github.context.repo.owner,
@@ -93,31 +90,23 @@ async function run () {
           path: gitFile.path,
           ref: github.context.ref
         })
-
         const file = Buffer.from(markdown.data.content, 'base64').toString('utf8')
         const matter = frontMatter(file)
-
         // Ignore markdown files missing front-matter title or category
-        if (!matter.data.hasOwnProperty('category')) {
+        if (!matter.data.hasOwnProperty('title') && !matter.data.hasOwnProperty('category')) {
           core.warning(markdown.data.path + ' was not synced (missing title/category front-matter)')
           return
         }
         // get category id
         category = await request
-          .get(`https://dash.readme.io/api/v1/categories/${slugify(matter.data.category)}`, {
+          .get(`https://dash.readme.io/api/v1/categories/${matter.data.category.replace(/\s+/g, '-').toLowerCase()}`, {
             json: true,
             ...options
           })
           .catch(validationErrors)
-
-        // Get filename with no extension
-        let filenameNoExt     = markdown.data.name.replace(path.extname(markdown.data.name), '')
-        matter.data.category  = category.body._id
-        // Set title from filename, and replace all '_' with spaces
-        matter.data.title     = filenameNoExt.replace(/_/g, ' ')
-
+        matter.data.category = category.body._id
         // Stripping the markdown extension from the filename and slug formatting
-        const slug = slugify(filenameNoExt) // filename-to-slug-no-extesion
+        const slug = slugify(matter.data.title)
         const hash = markdown.data.sha
 
         return request
