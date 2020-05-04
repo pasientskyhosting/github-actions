@@ -93,7 +93,7 @@ async function run () {
         const file = Buffer.from(markdown.data.content, 'base64').toString('utf8')
         const matter = frontMatter(file)
         // Ignore markdown files missing front-matter title or category
-        if (!matter.data.hasOwnProperty('title') && !matter.data.hasOwnProperty('category')) {
+        if (!matter.data.hasOwnProperty('title') || !matter.data.hasOwnProperty('category')) {
           core.warning(markdown.data.path + ' was not synced (missing title/category front-matter)')
           return
         }
