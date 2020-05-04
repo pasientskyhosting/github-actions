@@ -5,6 +5,7 @@ const fs = require('fs')
 const path = require('path')
 const crypto = require('crypto')
 const frontMatter = require('gray-matter')
+const slugify = require('slugify')
 
 async function run () {
   try {
@@ -22,6 +23,12 @@ async function run () {
       },
       auth: { user: readmeKey },
       resolveWithFullResponse: true
+    }
+    const slugOptions = {
+      replacement: '-', // replace spaces with replacement character, defaults to `-`
+      remove: undefined, // remove characters that match regex, defaults to `undefined`
+      lower: true, // convert to lower case, defaults to `false`
+      strict: false // strip special characters except replacement, defaults to `false`
     }
     // get file-path
     const repoFiles = await client.repos.getContents({
@@ -98,15 +105,16 @@ async function run () {
         }
         // get category id
         category = await request
-          .get(`https://dash.readme.io/api/v1/categories/${matter.data.category.replace(/\s+/g, '-').toLowerCase()}`, {
+          .get(`https://dash.readme.io/api/v1/categories/${slugify(matter.data.category, slugOptions)}`, {
             json: true,
             ...options
           })
           .catch(validationErrors)
         matter.data.category = category.body._id
-        // Stripping the markdown extension from the filename and slug formatting
-        const slug = markdown.data.name.replace(path.extname(markdown.data.name), '').replace(/\s+/g, '-').toLowerCase()
-        const hash = markdown.data.sha
+        // Slug from repo + filename
+        const filenameNoExt = markdown.data.name.replace(path.extname(markdown.data.name), '')
+        const slug = slugify(github.context.repo.repo + '-' + filenameNoExt, slugOptions)
+        const hash = markdown.data.shaa
 
         return request
           .get(`https://dash.readme.io/api/v1/docs/${slug}`, {
