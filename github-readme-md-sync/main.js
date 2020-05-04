@@ -104,8 +104,13 @@ async function run () {
           })
           .catch(validationErrors)
         matter.data.category = category.body._id
-        // Stripping the markdown extension from the filename and slug formatting
-        const slug = markdown.data.name.replace(path.extname(markdown.data.name), '').replace(/\s+/g, '-').toLowerCase()
+        // Check if matter has slug, else use filename
+        if (!matter.data.hasOwnProperty('slug')) {
+          // Stripping the markdown extension from the filename and slug formatting
+          const slug = markdown.data.name.replace(path.extname(markdown.data.name), '').replace(/\s+/g, '-').toLowerCase()
+        } else {
+          const slug = matter.data.slug
+        }
         const hash = markdown.data.sha
 
         return request
