@@ -8280,7 +8280,13 @@ function isBuffer(val) {
 
 
 /***/ }),
-/* 187 */,
+/* 187 */
+/***/ (function(module) {
+
+module.exports = eval("require")("slugify");
+
+
+/***/ }),
 /* 188 */,
 /* 189 */,
 /* 190 */,
@@ -35177,6 +35183,7 @@ const fs = __webpack_require__(747)
 const path = __webpack_require__(622)
 const crypto = __webpack_require__(373)
 const frontMatter = __webpack_require__(435)
+const slugify = __webpack_require__(187)
 
 async function run () {
   try {
@@ -35270,14 +35277,14 @@ async function run () {
         }
         // get category id
         category = await request
-          .get(`https://dash.readme.io/api/v1/categories/${matter.data.category.replace(/\s+/g, '-').toLowerCase()}`, {
+          .get(`https://dash.readme.io/api/v1/categories/${slugify(matter.data.category, { lower: true })}`, {
             json: true,
             ...options
           })
           .catch(validationErrors)
         matter.data.category = category.body._id
-        // Stripping the markdown extension from the filename and slug formatting
-        const slug = markdown.data.name.replace(path.extname(markdown.data.name), '').replace(/\s+/g, '-').toLowerCase()
+        // Slug from title
+        const slug = slugify(matter.data.title, { lower: true })
         const hash = markdown.data.sha
 
         return request

@@ -5,6 +5,7 @@ const fs = require('fs')
 const path = require('path')
 const crypto = require('crypto')
 const frontMatter = require('gray-matter')
+const slugify = require('slugify')
 
 async function run () {
   try {
@@ -98,14 +99,14 @@ async function run () {
         }
         // get category id
         category = await request
-          .get(`https://dash.readme.io/api/v1/categories/${matter.data.category.replace(/\s+/g, '-').toLowerCase()}`, {
+          .get(`https://dash.readme.io/api/v1/categories/${slugify(matter.data.category, { lower: true })}`, {
             json: true,
             ...options
           })
           .catch(validationErrors)
         matter.data.category = category.body._id
-        // Stripping the markdown extension from the filename and slug formatting
-        const slug = markdown.data.name.replace(path.extname(markdown.data.name), '').replace(/\s+/g, '-').toLowerCase()
+        // Slug from title
+        const slug = slugify(matter.data.title, { lower: true })
         const hash = markdown.data.sha
 
         return request
