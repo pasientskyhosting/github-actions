@@ -35202,6 +35202,12 @@ async function run () {
       auth: { user: readmeKey },
       resolveWithFullResponse: true
     }
+    const slugOptions = {
+      replacement: '-', // replace spaces with replacement character, defaults to `-`
+      remove: undefined, // remove characters that match regex, defaults to `undefined`
+      lower: true, // convert to lower case, defaults to `false`
+      strict: false // strip special characters except replacement, defaults to `false`
+    }
     // get file-path
     const repoFiles = await client.repos.getContents({
       owner: github.context.repo.owner,
@@ -35277,15 +35283,16 @@ async function run () {
         }
         // get category id
         category = await request
-          .get(`https://dash.readme.io/api/v1/categories/${slugify(matter.data.category, { lower: true })}`, {
+          .get(`https://dash.readme.io/api/v1/categories/${slugify(matter.data.category, slugOptions)}`, {
             json: true,
             ...options
           })
           .catch(validationErrors)
         matter.data.category = category.body._id
-        // Slug from title
-        const slug = slugify(matter.data.title, { lower: true })
-        const hash = markdown.data.sha
+        // Slug from repo + filename
+        const filenameNoExt = markdown.data.name.replace(path.extname(markdown.data.name), '')
+        const slug = slugify(github.context.repo.repo + '-' + filenameNoExt, slugOptions)
+        const hash = markdown.data.shaa
 
         return request
           .get(`https://dash.readme.io/api/v1/docs/${slug}`, {
