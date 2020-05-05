@@ -35284,7 +35284,7 @@ async function run () {
         // Slug from repo + filename
         const filenameNoExt = markdown.data.name.replace(path.extname(markdown.data.name), '')
         const slug = ('readme' + '-' + filenameNoExt).replace(/\s+/g, '-').toLowerCase()
-        const hash = crypto.createHash('sha1').update(matter.content).digest('hex')
+        const hash = crypto.createHash('sha1').update(file).digest('hex')
 
         return request
           .get(`https://dash.readme.io/api/v1/docs/${slug}`, {
