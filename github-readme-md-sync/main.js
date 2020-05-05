@@ -69,6 +69,9 @@ async function run () {
           json: { slug, body: file.content, ...file.data, lastUpdatedHash: hash },
           ...options
         })
+        .then(
+          core.info(file.data.path + ` was succesfully created to /api/v1/docs/${slug}`)
+        )
         .catch(validationErrors)
     }
     // update readme.io doc
@@ -85,6 +88,9 @@ async function run () {
           }),
           ...options
         })
+        .then(
+          core.info(file.data.path + ` was succesfully updated to /api/v1/docs/${slug}`)
+        )
         .catch(validationErrors)
     }
 
