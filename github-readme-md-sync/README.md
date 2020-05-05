@@ -9,7 +9,7 @@ Just copy and paste the following into `.github/workflows/readme-md-sync.yml`. Y
 
 Once that is done you should be good to go! Any subsequent commits to master will automatically start the sync process and sync your specified files to ReadMe.
 
-```
+```yaml
 name: Sync to ReadMe
 on:
   push:
