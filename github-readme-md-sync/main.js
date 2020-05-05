@@ -111,7 +111,7 @@ async function run () {
         matter.data.category = category.body._id
         // Slug from repo + filename
         const filenameNoExt = markdown.data.name.replace(path.extname(markdown.data.name), '')
-        const slug = ('readme' + '-' + filenameNoExt).replace(/\s+/g, '-').toLowerCase()
+        const slug = (github.context.repo.repo + '-' + filenameNoExt).replace(/\s+/g, '-').toLowerCase()
         const hash = crypto.createHash('sha1').update(file).digest('hex')
 
         return request
