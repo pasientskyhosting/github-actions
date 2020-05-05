@@ -92,8 +92,10 @@ async function run () {
           path: gitFile.path,
           ref: github.context.ref
         })
+        // Trim off the refs/heads from the github html_url
+        const url = markdown.data.html_url.replace('refs/heads/', '')
         // Add source link to end of file
-        const footer = `\n  \n***  \nSource: [${markdown.data._links.html}](${markdown.data._links.html}\n)`
+        const footer = `\n  \n***  \nSource: [${url}](${url}\n)`
         const file = Buffer.from(markdown.data.content, 'base64').toString('utf8') + footer
         const matter = frontMatter(file)
         // Ignore markdown files missing front-matter title or category
