@@ -93,9 +93,7 @@ async function run () {
           ref: github.context.ref
         })
         // Add source link to end of file
-        const url = `https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/blob/${github.context
-          .ref}/${gitFile.path}`
-        const footer = `\n  \n***  \nSource: [${url}](${url}\n)`
+        const footer = `\n  \n***  \nSource: [${markdown.data._links.html}](${markdown.data._links.html}\n)`
         const file = Buffer.from(markdown.data.content, 'base64').toString('utf8') + footer
         const matter = frontMatter(file)
         // Ignore markdown files missing front-matter title or category
