@@ -5,7 +5,6 @@ const fs = require('fs')
 const path = require('path')
 const crypto = require('crypto')
 const frontMatter = require('gray-matter')
-const slugify = require('slugify')
 
 async function run () {
   try {
@@ -23,12 +22,6 @@ async function run () {
       },
       auth: { user: readmeKey },
       resolveWithFullResponse: true
-    }
-    const slugOptions = {
-      replacement: '-', // replace spaces with replacement character, defaults to `-`
-      remove: undefined, // remove characters that match regex, defaults to `undefined`
-      lower: true, // convert to lower case, defaults to `false`
-      strict: false // strip special characters except replacement, defaults to `false`
     }
     // get file-path
     const repoFiles = await client.repos.getContents({
@@ -69,12 +62,14 @@ async function run () {
           json: { slug, body: file.content, ...file.data, lastUpdatedHash: hash },
           ...options
         })
+        .then(core.info(file.data.title + ` was succesfully created to /api/v1/docs/${slug}`))
         .catch(validationErrors)
     }
     // update readme.io doc
     function updateDoc (slug, file, hash, existingDoc) {
-      if (hash === existingDoc.lastUpdatedHash) {
-        return `\`${slug}\` not updated. No changes.`
+      if (hash === existingDoc.body.lastUpdatedHash) {
+        core.info(`\'${file.data.title}\' not updated. No changes.`)
+        return
       }
       return request
         .put(`https://dash.readme.io/api/v1/docs/${slug}`, {
@@ -85,18 +80,21 @@ async function run () {
           }),
           ...options
         })
+        .then(core.info(`\'${file.data.title}\'` + ` was succesfully updated to /api/v1/docs/${slug}`))
         .catch(validationErrors)
     }
 
     return Promise.all(
       files.map(async (gitFile) => {
-        markdown = await client.repos.getContents({
+        const markdown = await client.repos.getContents({
           owner: github.context.repo.owner,
           repo: github.context.repo.repo,
           path: gitFile.path,
           ref: github.context.ref
         })
-        const file = Buffer.from(markdown.data.content, 'base64').toString('utf8')
+        // Add source link to end of file
+        const footer = `\n  \n***  \nSource: [${markdown.data.html_url}](${markdown.data.html_url}\n)`
+        const file = Buffer.from(markdown.data.content, 'base64').toString('utf8') + footer
         const matter = frontMatter(file)
         // Ignore markdown files missing front-matter title or category
         if (!matter.data.hasOwnProperty('title') || !matter.data.hasOwnProperty('category')) {
@@ -104,8 +102,8 @@ async function run () {
           return
         }
         // get category id
-        category = await request
-          .get(`https://dash.readme.io/api/v1/categories/${slugify(matter.data.category, slugOptions)}`, {
+        const category = await request
+          .get(`https://dash.readme.io/api/v1/categories/${matter.data.category.replace(/\s+/g, '-').toLowerCase()}`, {
             json: true,
             ...options
           })
@@ -113,8 +111,8 @@ async function run () {
         matter.data.category = category.body._id
         // Slug from repo + filename
         const filenameNoExt = markdown.data.name.replace(path.extname(markdown.data.name), '')
-        const slug = slugify(github.context.repo.repo + '-' + filenameNoExt, slugOptions)
-        const hash = markdown.data.shaa
+        const slug = ('readme' + '-' + filenameNoExt).replace(/\s+/g, '-').toLowerCase()
+        const hash = crypto.createHash('sha1').update(file).digest('hex')
 
         return request
           .get(`https://dash.readme.io/api/v1/docs/${slug}`, {
