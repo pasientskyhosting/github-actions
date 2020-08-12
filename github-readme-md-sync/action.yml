@@ -7,12 +7,16 @@ branding:
 inputs: 
   repo-token:
     description: 'The GITHUB_TOKEN secret'
+    required: true
   file-path:
     description: 'The folder in your git repo to sync. Omit to take the entire repo'
+    required: true
   readme-api-key:
     description: 'Your API key for your ReadMe project'
+    required: true
   readme-api-version:
     description: 'ReadMe version to sync to'
+    required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'

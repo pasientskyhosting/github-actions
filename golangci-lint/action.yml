@@ -11,15 +11,19 @@ inputs:
   golangci_lint_flags:
     description: 'golangci-lint flags. (golangci-lint run --out-format=line-number <golangci_lint_flags>)'
     default: ''
+    required: false
   tool_name:
     description: 'Tool name to use for reviewdog reporter'
     default: 'golangci_lint_output'
+    required: false
   level:
     description: 'Report level for reviewdog [info,warning,error]'
     default: 'error'
+    required: false
   go_get:
     description: 'Downloads the packages named by the import paths'
     default: 'no'
+    required: false
 
 runs:
   using: 'docker'

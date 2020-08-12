@@ -9,8 +9,6 @@ inputs:
     required: true
     default: './Dockerfile'
 
-outputs:
-
 runs:
   using: 'docker'
   image: 'Dockerfile'
