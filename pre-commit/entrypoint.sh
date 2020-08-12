@@ -7,6 +7,7 @@
 set -e
 
 echo "===> Running version: $VERSION"
+echo "===> Running Python version: $PYTHON_VERSION"
 
 # The following environment variables will be provided by the environment automatically: GITHUB_WORKSPACE
 mkdir -p $GITHUB_WORKSPACE

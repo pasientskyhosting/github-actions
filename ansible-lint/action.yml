@@ -11,9 +11,8 @@ inputs:
   tool_name:
     description: 'Reviewdog identifier'
     default: 'ansible_lint'
+    required: false
   
-outputs:
-
 runs:
   using: 'docker'
   image: 'Dockerfile'

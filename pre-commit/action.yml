@@ -4,8 +4,6 @@ name: 'Run pre-commit'
 description: 'Install and run pre-commit as a Github action'
 author: 'Karsten Jakobsen @karstenjakobsen'
 
-inputs:
-
 runs:
   using: 'docker'
   image: 'Dockerfile'
