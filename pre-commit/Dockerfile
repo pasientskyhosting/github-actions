@@ -1,6 +1,6 @@
 ARG PYTHON_VERSION
 
-FROM python:${PYTHON_VERSION}-alpine3.11
+FROM python:${PYTHON_VERSION}
 LABEL maintainer="Karsten Jakobsen <kj@patientsky.com>"
 
 RUN apk update --no-cache \
