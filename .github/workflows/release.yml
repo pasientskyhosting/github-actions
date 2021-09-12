@@ -39,7 +39,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        python_version: [ '3.9.7-alpine3.14' ]
+        python_version: [ '3.5.9-alpine3.12, '3.7.12-alpine3.14', 3.9.7-alpine3.14 ]
 
     name: Docker Build Pre Commit
     steps:
