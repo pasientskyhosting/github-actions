@@ -1,5 +1,5 @@
 # Container image that runs your code
-FROM alpine:3.10
+FROM alpine:3.14.4
 LABEL maintainer="Karsten Jakobsen <kj@patientsky.com>"
 
 LABEL "com.github.actions.name"="Hello World"
